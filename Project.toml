@@ -1,0 +1,7 @@
+name = "RoTools"
+uuid = "f1f3d6da-d25e-49cd-8859-ecacf3019bba"
+authors = ["Chever Ding <dingzw@nuaa.edu.cn>"]
+version = "0.1.0"
+
+[deps]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
