@@ -2,10 +2,17 @@ module RoTools
 
 using Interpolations
 
-export BladeGeom 
+export BladeGeom , itr2d
 
 # 桨叶弦长和扭转分布规范化
 function itr2d(x,y; extrapolation_method = Line()) # make convience LinearInterpolation of 2d array 
+    res = LinearInterpolation(x,y,extrapolation_bc=extrapolation_method)
+    return res 
+end 
+
+function itr2d(mat::Matrix; extrapolation_method = Line())
+    x = mat[:,1]
+    y = mat[:,2]
     res = LinearInterpolation(x,y,extrapolation_bc=extrapolation_method)
     return res 
 end 
