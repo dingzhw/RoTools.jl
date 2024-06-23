@@ -102,6 +102,23 @@ function blade_geom_spl2std(spl_inp,rbe)
     return geom 
 end 
 
+# convert geom matrix to BSplines coffs 
+function blade_geom_std2spl(geom0::Matrix)
+    geom = convert(Matrix{Float64},geom0[:,1:3])
+    rbe = geom[:,1]
+    chord = geom[:,2]
+    twist = geom[:,3]
+    bspl_chord = BSplineBasis(4,range(rbe[1],rbe[end],3))
+    bspl_twist = BSplineBasis(3,range(rbe[1],rbe[end],3))
+    spl_chord = BSplines.interpolate(bspl_chord,rbe,chord)
+    spl_twist = BSplines.interpolate(bspl_twist,rbe,twist)
+
+    coeffs_chord = BSplines.coeffs(spl_chord)
+    coeffs_twist = BSplines.coeffs(spl_twist)
+
+    return vcat(coeffs_chord, coeffs_twist)
+end 
+
 # 基于B样条曲线的桨叶几何外形DUST描述
 function bspl_dust_geom(opt_input;afname="af01",nseg=1)
 
