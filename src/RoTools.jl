@@ -97,7 +97,7 @@ function blade_geom_spl2std(spl_inp,rbe)
     chord = cspl.(rbe)
     twist = tspl.(rbe) 
 
-    geom = hcat(collect(rbe),chord, twist)
+    geom = hcat(collect(rbe),map(x->round(x,digits=4),chord), map(x->round(x,digits=4),twist))
 
     return geom 
 end 
