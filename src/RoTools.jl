@@ -60,13 +60,13 @@ end
 function heli_blade_geom(opt_input,dustgeom)
 
     rbe = dustgeom.rbe
-    bspl_chord = BSplineBasis(4,range(rbe[1],rbe[end],3))
-    bspl_twist = BSplineBasis(3,range(rbe[1],rbe[end],2))
+    bspl_chord = BSplines.BSplineBasis(4,range(rbe[1],rbe[end],3))
+    bspl_twist = BSplines.BSplineBasis(3,range(rbe[1],rbe[end],2))
     cspl_chord = opt_input[1:5]
     cspl_twist = opt_input[6:8]
 
-    cspl = Spline(bspl_chord, cspl_chord)
-    tspl = Spline(bspl_twist, cspl_twist)
+    cspl = BSplines.Spline(bspl_chord, cspl_chord)
+    tspl = BSplines.Spline(bspl_twist, cspl_twist)
 
     chord = cspl.(rbe)
     twist = tspl.(rbe) 
@@ -86,13 +86,13 @@ end
 
 # convert BSplines coffs to geom matrix 
 function blade_geom_spl2std(spl_inp,rbe)
-    bspl_chord = BSplineBasis(4,range(rbe[1],rbe[end],3))
-    bspl_twist = BSplineBasis(3,range(rbe[1],rbe[end],3))
+    bspl_chord = BSplines.BSplineBasis(4,range(rbe[1],rbe[end],3))
+    bspl_twist = BSplines.BSplineBasis(3,range(rbe[1],rbe[end],3))
     cspl_chord = spl_inp[1:5]
     cspl_twist = spl_inp[6:9]
 
-    cspl = Spline(bspl_chord, cspl_chord)
-    tspl = Spline(bspl_twist, cspl_twist)
+    cspl = BSplines.Spline(bspl_chord, cspl_chord)
+    tspl = BSplines.Spline(bspl_twist, cspl_twist)
 
     chord = cspl.(rbe)
     twist = tspl.(rbe) 
@@ -108,8 +108,8 @@ function blade_geom_std2spl(geom0::Matrix)
     rbe = geom[:,1]
     chord = geom[:,2]
     twist = geom[:,3]
-    bspl_chord = BSplineBasis(4,range(rbe[1],rbe[end],3))
-    bspl_twist = BSplineBasis(3,range(rbe[1],rbe[end],3))
+    bspl_chord = BSplines.BSplineBasis(4,range(rbe[1],rbe[end],3))
+    bspl_twist = BSplines.BSplineBasis(3,range(rbe[1],rbe[end],3))
     spl_chord = BSplines.interpolate(bspl_chord,rbe,chord)
     spl_twist = BSplines.interpolate(bspl_twist,rbe,twist)
 
