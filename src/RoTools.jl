@@ -1,9 +1,17 @@
 module RoTools
 
-import Interpolations
-import BSplines
+using CSV
+using DataFrames
+using Interpolations
+using FilePathsBase
 
 export BladeGeom, itr2d, hoverFM
+
+include("geom_process.jl")
+include("dust_pre_process.jl")
+include("dust_post_process.jl")
+include("flowuns_pre_process.jl")
+include("flowuns_post_process.jl")
 
 # 桨叶弦长和扭转分布规范化
 function itr2d(x,y; extrapolation_method = Line()) # make convience LinearInterpolation of 2d array 
